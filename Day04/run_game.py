@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-랩탑에서 테스트할 Pong AI 게임
+랩탑용 테스트 Pong AI 게임
 Frame Skip 적용 + TFLite 모델 사용
 """
 
@@ -24,7 +24,7 @@ class PongAgent:
             model_path: TFLite 모델 파일 경로
             frame_skip: N 프레임마다 한 번 추론 (기본값: 4)
         """
-        print(f"🤖 AI 에이전트 초기화 중...")
+        print(f"AI 에이전트 초기화")
         
         # TFLite 인터프리터 로드 (랩탑용)
         self.interpreter = tf.lite.Interpreter(model_path=model_path)
@@ -163,7 +163,8 @@ def main():
     FRAME_SKIP = 4  # 2~8 사이에서 조절 가능
     MAX_EPISODES = 5  # 랩탑 테스트는 적게
     RENDER_MODE = 'human'  # 랩탑에서는 화면 보면서 테스트!
-    
+    Target_FPS = 120  # 목표 FPS 설정 (환경에 따라 다름)
+
     # 헤더 출력
     print_header()
     print(f"💻 실행 환경: Windows 랩탑")
@@ -181,7 +182,7 @@ def main():
         
         # 2. 게임 환경 초기화
         print(f"\n🎮 게임 환경 초기화 중...")
-        env = PongEnv(render_mode=RENDER_MODE)
+        env = PongEnv(render_mode=RENDER_MODE, target_fps=Target_FPS)
         print(f"✅ 게임 환경 로드 완료!")
         print(f"\n💡 팁: ESC 키를 눌러 언제든 종료할 수 있습니다.")
         
